@@ -572,7 +572,7 @@ button.active {
   min-width: 800px;
   min-height: 400px;
 }
-.cheating-summary {
+.cheating-summary, .evaluator-info {
   background-color: #f8f8f8;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -606,3 +606,11 @@ button.active {
   color: #666;
 }
 
+.info-item {
+  margin-bottom: 10px;
+}
+.info-item strong {
+  display: inline-block;
+  width: 80px;
+  color: #555;
+}

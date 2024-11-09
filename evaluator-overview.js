@@ -8,17 +8,17 @@ function setupEvaluatorTableClickEvents() {
   const evaluatorRows = document.querySelectorAll('.evaluator-table tbody tr');
   evaluatorRows.forEach(row => {
       row.addEventListener('click', function() {
-          const evaluatorName = this.querySelector('td:first-child').textContent;
-          goToEvaluatorPage(evaluatorName);
+          const evaluatorEmail = this.querySelector('td:first-child').textContent;
+          goToEvaluatorPage(evaluatorEmail);
       });
   });
 }
 
 // 평가자 페이지로 이동하는 함수
-function goToEvaluatorPage(evaluatorName) {
-  console.log(`Going to ${evaluatorName}'s page`);
+function goToEvaluatorPage(evaluatorEmail) {
+  console.log(`Going to ${evaluatorEmail}'s page`);
   // 실제 구현: 평가자 페이지로 이동
-  window.location.href = `evaluator-details.html?name=${encodeURIComponent(evaluatorName)}`;
+  window.location.href = `evaluator-details.html?email=${encodeURIComponent(evaluatorEmail)}`;
 }
 
 // 필터 토글 함수
@@ -28,17 +28,41 @@ function toggleFilter(filterId) {
 }
 
 const evaluators = [
-  "John Smith", "Emma Johnson", "Michael Williams", "Olivia Brown", "William Jones",
-  "Ava Davis", "James Miller", "Sophia Wilson", "Robert Taylor", "Isabella Anderson",
-  "David Thomas", "Mia Martinez", "Joseph Garcia", "Charlotte Robinson", "Charles Clark",
-  "Amelia Rodriguez", "Daniel Lewis", "Harper Lee", "Matthew Walker", "Evelyn Hall",
-  "Andrew Allen", "Abigail Young", "Christopher King", "Emily Wright", "Joshua Scott",
-  "Elizabeth Green", "Ryan Baker", "Sofia Adams", "Kevin Nelson", "Grace Hill"
+  'john.smith798@example.com',
+  'emma.johnson955@yahoo.com',
+  'michael.williams129@hotmail.com',
+  'olivia.brown404@gmail.com',
+  'william.jones196@outlook.com',
+  'ava.davis274@example.com',
+  'james.miller290@hotmail.com',
+  'sophia.wilson764@example.com',
+  'robert.taylor851@example.com',
+  'isabella.anderson788@example.com',
+  'david.thomas939@hotmail.com',
+  'mia.martinez731@gmail.com',
+  'joseph.garcia410@example.com',
+  'charlotte.robinson597@yahoo.com',
+  'charles.clark312@example.com',
+  'amelia.rodriguez161@example.com',
+  'daniel.lewis604@outlook.com',
+  'harper.lee927@example.com',
+  'matthew.walker311@hotmail.com',
+  'evelyn.hall557@example.com',
+  'andrew.allen113@hotmail.com',
+  'abigail.young249@hotmail.com',
+  'christopher.king208@example.com',
+  'emily.wright264@example.com',
+  'joshua.scott538@gmail.com',
+  'elizabeth.green689@example.com',
+  'ryan.baker895@example.com',
+  'sofia.adams751@example.com',
+  'kevin.nelson707@hotmail.com',
+  'grace.hill747@yahoo.com'
 ];
 
 const tbody = document.querySelector("#evaluatorTable tbody");
 
-evaluators.forEach(name => {
+evaluators.forEach(email => {
   const row = document.createElement("tr");
   const dsScore = Math.floor(Math.random() * 101);
   const sqlScore = Math.floor(Math.random() * 101);
@@ -46,7 +70,7 @@ evaluators.forEach(name => {
   const sqlStatus = sqlScore >= 70 ? "Pass" : "Fail";
 
   row.innerHTML = `
-      <td>${name}</td>
+      <td>${email}</td>
       <td>${dsScore}</td>
       <td>${dsStatus}</td>
       <td>${sqlScore}</td>
