@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codepresso Styled Webpage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="tab-buttons">
+            <button class="tab-button active" onclick="showTab('overview')">Overview</button>
+            <button class="tab-button" onclick="goToPage('evaluator-overview.html')">Evaluator Overview</button>
+        </div>
+
+    <div id="overview" class="tab active">
+      <div class="exam-info">
+        <h3>Assessment Information</h3>
+        <ul>
+          <li><strong>Name:</strong> Data Analytics Skills Assessment: Data Science & SQL</li>
+          <li><strong>Date:</strong> October 11, 2024</li>
+          <li><strong>Number of candidates:</strong> 35</li>
+        </ul>
+      </div>
+
+      <div class="evaluation-info">
+        <h3>Summary of Assessment Results</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Track</th>
+              <th>Level</th>
+              <th>Skills</th>
+              <th>Passed</th>
+              <th>Pass Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Data Science</td>
+              <td>Level 1</td>
+              <td>
+                <span class="tag">Preprocessing</span>
+                <span class="tag">Model prediction and Evaluation</span>
+                <span class="tag">Model Selection</span>
+                <span class="tag">Visualization</span>
+                <span class="tag">Evaluation Metrics</span>
+              </td>
+              <td>8</td>
+              <td>22%</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>SQL</td>
+              <td>Level 2</td>
+              <td>
+                <span class="tag">Data Retrieval</span>
+                <span class="tag">Data Filtering</span>
+                <span class="tag">Joins</span>
+                <span class="tag">Aggregations</span>
+                <span class="tag">Subqueries</span>
+              </td>
+              <td>5</td>
+              <td>14%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Detailed Results and Score Analysis</h3>
+      <div class="tab-buttons">
+        <button class="tab-button" onclick="showSubTab('ds')">Data Science</button>
+        <button class="tab-button" onclick="showSubTab('sql')">SQL</button>
+      </div>
+
+        <div id="ds" class="sub-tab active">
+            <div class="score-distribution-container">
+                <div class="chart-wrapper">
+                    <h3>Score Distribution</h3>
+                    <canvas id="dsScoreDistributionChart"></canvas>
+                </div>
+                <div class="stats-wrapper">
+                    <h3>Score Statistics</h3>
+                    <div class="stats-container">
+                      <p>Average: <span id="dsAverage"></span></p>
+                      <p>Highest: <span id="dsMax"></span></p>
+                      <p>Lowest: <span id="dsMin"></span></p>
+                      <p>Median: <span id="dsMedian"></span></p>
+                    </div>
+                </div>
+            </div>
+            <h3>Score Distribution by Question</h3>
+            <div class="question-details-container">
+              <div class="question-charts">
+                <div class="tab-buttons">
+                  <button class="tab-button active" onclick="showQuestionGraph('ds', 1)">Question 1</button>
+                  <button class="tab-button" onclick="showQuestionGraph('ds', 2)">Question 2</button>
+                  <button class="tab-button" onclick="showQuestionGraph('ds', 3)">Question 3</button>
+                </div>
+                <canvas id="dsQuestion1Chart"></canvas>
+                <canvas id="dsQuestion2Chart"></canvas>
+                <canvas id="dsQuestion3Chart"></canvas>
+              </div>
+              <div class="question-info-wrapper">
+                <div id="dsQuestion1Info" class="question-info"></div>
+                <div id="dsQuestion2Info" class="question-info"></div>
+                <div id="dsQuestion3Info" class="question-info"></div>
+              </div>
+            </div>
+            <h3>Score Distribution by Skill</h3>
+            <div class="chart-container">
+                <canvas id="dsData_PreprocessingChart" class="tag-chart"></canvas>
+                <canvas id="dsFeature_EngineeringChart" class="tag-chart"></canvas>
+                <canvas id="dsModel_SelectionChart" class="tag-chart"></canvas>
+                <canvas id="dsEvaluation_MetricsChart" class="tag-chart"></canvas>
+                <canvas id="dsVisualizationChart" class="tag-chart"></canvas>
+            </div>
+            <div class="tag-buttons">
+                <button class="tag-button" data-tag="Data_Preprocessing" onclick="showTagGraph('ds', 'Data_Preprocessing')">Data Preprocessing</button>
+                <button class="tag-button" data-tag="Feature_Engineering" onclick="showTagGraph('ds', 'Feature_Engineering')">Feature Engineering</button>
+                <button class="tag-button" data-tag="Model_Selection" onclick="showTagGraph('ds', 'Model_Selection')">Model Selection</button>
+                <button class="tag-button" data-tag="Evaluation_Metrics" onclick="showTagGraph('ds', 'Evaluation_Metrics')">Evaluation Metrics</button>
+                <button class="tag-button" data-tag="Visualization" onclick="showTagGraph('ds', 'Visualization')">Visualization</button>
+            </div>
+
+          </div>
+
+        <div id="sql" class="sub-tab">
+            <div class="score-distribution-container">
+                <div class="chart-wrapper">
+                    <h3>Score Distribution</h3>
+                    <canvas id="sqlScoreDistributionChart"></canvas>
+                </div>
+                <div class="stats-wrapper">
+                    <h3>Score Statistics</h3>
+                    <div class="stats-container">
+                      <p>Average: <span id="sqlAverage"></span></p>
+                      <p>Highest: <span id="sqlMax"></span></p>
+                      <p>Lowest: <span id="sqlMin"></span></p>
+                      <p>Median: <span id="sqlMedian"></span></p>
+                    </div>
+                </div>
+            </div>
+            <h3>Score Distribution by Question</h3>
+            <div class="question-details-container">
+              <div class="question-charts">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="showQuestionGraph('sql', 1)">Question 1</button>
+                    <button class="tab-button" onclick="showQuestionGraph('sql', 2)">Question 2</button>
+                    <button class="tab-button" onclick="showQuestionGraph('sql', 3)">Question 3</button>
+                </div>
+                    <div class="chart-container">
+                      <canvas id="sqlQuestion1Chart"></canvas>
+                      <canvas id="sqlQuestion2Chart"></canvas>
+                      <canvas id="sqlQuestion3Chart"></canvas>
+                    </div>
+                </div>
+                  <div class="question-info-wrapper">
+                    <div id="sqlQuestion1Info" class="question-info"></div>
+                    <div id="sqlQuestion2Info" class="question-info"></div>
+                    <div id="sqlQuestion3Info" class="question-info"></div>
+                  </div>
+            </div>
+
+          <h3>Score Distribution by Skill</h3>
+          <div class="chart-container">
+              <canvas id="sqlData_RetrievalChart" class="tag-chart"></canvas>
+              <canvas id="sqlData_FilteringChart" class="tag-chart"></canvas>
+              <canvas id="sqlJoinsChart" class="tag-chart"></canvas>
+              <canvas id="sqlAggregationsChart" class="tag-chart"></canvas>
+              <canvas id="sqlSubqueriesChart" class="tag-chart"></canvas>
+          </div>
+          <div class="tag-buttons">
+              <button class="tag-button" data-tag="Data_Retrieval" onclick="showTagGraph('sql', 'Data_Retrieval')">Data_Retrieval</button>
+              <button class="tag-button" data-tag="Data_Filtering" onclick="showTagGraph('sql', 'Data_Filtering')">Data_Filteringg</button>
+              <button class="tag-button" data-tag="Joins" onclick="showTagGraph('sql', 'Joins')">Joins</button>
+              <button class="tag-button" data-tag="Aggregations" onclick="showTagGraph('sql', 'Aggregations')">Aggregations</button>
+              <button class="tag-button" data-tag="Subqueries" onclick="showTagGraph('sql', 'Subqueries')">Subqueries</button>
+          </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+<script src="script.js"></script>
+
+</html>
