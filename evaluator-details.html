@@ -19,9 +19,12 @@
 </head>
 
 <body>
-  <div class="tab">
-    <button class="tablink" onclick="openTab('ds')">Data Science</button>
-    <button class="tablink" onclick="openTab('sql')">SQL</button>
+  <div class="tab" style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <button class="tablink" onclick="openTab('ds')">Data Science</button>
+      <button class="tablink" onclick="openTab('sql')">SQL</button>
+    </div>
+    <button class="tablink" onclick="location.href='evaluator-overview.html'">Candidates List</button>
   </div>
   <div id="ds" class="tabcontent">
     <div class="subtab">
@@ -271,7 +274,19 @@
       <button class="subtablink" onclick="openSubTab('sqlCode', 'sql',event)">Code</button>
       <button class="subtablink" onclick="openSubTab('sqlCheating', 'sql',event)">Cheating</button>
     </div>
-
+    <h3>Candidate Profile</h3>
+    <div class="evaluator-info">
+      <div class="info-item">
+          <strong>Name:</strong> <span id="evaluator-name">John Doe</span>
+      </div>
+      <div class="info-item">
+          <strong>Email:</strong> <span id="evaluator-email">john.smith798@example.com</span>
+      </div>
+      <div class="info-item">
+          <strong>Role:</strong> <span id="evaluator-role">Data Analysis</span>
+      </div>
+  </div>
+  
     <div id="sqlResult" class="subtabcontent">
       <div class="score-summary">
         <div class="total-score">
