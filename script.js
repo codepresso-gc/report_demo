@@ -291,14 +291,15 @@ function loadData(tabId) {
     ];
     
     const dsQuestionScoresTest = [
-      [60, 70, 80, 90, 100],
-      [55, 65, 75, 85, 95],
-      [50, 60, 70, 80, 90]
+      [87, 88, 83, 74, 29],
+      [3, 63, 38, 4, 12],
+      [34, 21, 100, 99, 76]
     ];
+    
     const dsQuestionScoresAll = [
-      [55, 65, 75, 85, 95, 100],
-      [50, 60, 70, 80, 90, 100],
-      [45, 55, 65, 75, 85, 95]
+      [23, 52, 83, 69, 93, 68, 3, 50, 4, 26, 88, 74, 29, 63, 38, 87, 88, 83, 74, 29],
+      [86, 65, 61, 78, 1, 38, 76, 62, 97, 29, 83, 69, 93, 68, 3, 63, 38, 4, 12, 23],
+      [76, 62, 97, 29, 26, 81, 94, 98, 68, 7, 64, 63, 44, 81, 68, 34, 21, 100, 99, 76]
     ];
     updateQuestionInfo('ds', [
       { difficulty: 'Easy', type: 'Multiple Choice' },
@@ -306,11 +307,11 @@ function loadData(tabId) {
       { difficulty: 'Hard', type: 'Editor' }
     ]);
     const dsTagScores = {
-      'Data_Preprocessing': { average: 75, scores: [70, 75, 80, 85, 90] },
-      'Feature_Engineering': { average: 80, scores: [75, 80, 85, 90, 95] },
-      'Model_Selection': { average: 70, scores: [65, 70, 75, 80, 85] },
-      'Evaluation_Metrics': { average: 85, scores: [80, 85, 90, 95, 100] },
-      'Visualization': { average: 78, scores: [73, 78, 83, 88, 93] }
+      'Data_Preprocessing': {scores: [87, 88, 83, 74, 29, 3, 63, 38, 4, 12, 34, 21, 100, 99, 76, 23, 52, 83, 69, 93] },
+      'Feature_Engineering': {scores: [68, 86, 65, 61, 78, 1, 38, 76, 62, 97, 29, 26, 81, 94, 98, 68, 7, 64, 63, 44] },
+      'Model_Selection': {scores:[81, 68, 26, 52, 57, 72, 1, 62, 18, 49, 13, 65, 20, 76, 54, 88, 94, 6, 73, 70] },
+      'Evaluation_Metrics': {scores: [99, 69, 81, 65, 75, 83, 59, 80, 82, 18, 65, 48, 56, 16, 0, 71, 83, 30, 38, 53] },
+      'Visualization': {scores: [15, 41, 49, 9, 27, 30, 9, 40, 31, 44, 33, 39, 65, 94, 99, 63, 58, 59, 43, 96] }
   };
 
   Object.keys(dsTagScores).forEach(tag => {
@@ -337,9 +338,9 @@ function loadData(tabId) {
       [45, 55, 65, 75, 85]
     ];
     const sqlQuestionScoresAll = [
-      [50, 60, 70, 80, 90, 100],
-      [45, 55, 65, 75, 85, 95],
-      [40, 50, 60, 70, 80, 90]
+      [50, 60, 70, 80, 90, 100, 87, 88, 83, 74, 29, 3, 63, 38, 4, 12],
+      [45, 55, 65, 75, 85, 95, 34, 21, 100, 99, 76, 23, 52, 83, 69, 93],
+      [40, 50, 60, 70, 80, 90, 68, 86, 65, 61, 78, 1, 38, 76, 62, 97]
     ];
     updateQuestionInfo('sql', [
       { difficulty: 'Easy', type: 'Multiple Choice' },
@@ -347,12 +348,12 @@ function loadData(tabId) {
       { difficulty: 'Hard', type: 'Editor' }
     ]);
     const sqlTagScores = {
-      'Data_Retrieval': { average: 82, scores: [77, 82, 87, 92, 97] },
-      'Data_Filtering': { average: 78, scores: [73, 78, 83, 88, 93] },
-      'Joins': { average: 75, scores: [70, 75, 80, 85, 90] },
-      'Aggregations': { average: 80, scores: [75, 80, 85, 90, 95] },
-      'Subqueries': { average: 72, scores: [67, 72, 77, 82, 87] }
-  };
+      'Data_Retrieval': { scores: [87, 88, 83, 74, 29, 3, 63, 38, 4, 12, 34, 21, 100, 99, 76, 23, 52, 83, 69, 93] },
+      'Data_Filtering': { scores: [68, 86, 65, 61, 78, 1, 38, 76, 62, 97, 29, 26, 81, 94, 98, 68, 7, 64, 63, 44] },
+      'Joins': { scores: [81, 68, 26, 52, 57, 72, 1, 62, 18, 49, 13, 65, 20, 76, 54, 88, 94, 6, 73, 70] },
+      'Aggregations': { scores: [99, 69, 81, 65, 75, 83, 59, 80, 82, 18, 65, 48, 56, 16, 0, 71, 83, 30, 38, 53] },
+      'Subqueries': { scores: [15, 41, 49, 9, 27, 30, 9, 40, 31, 44, 33, 39, 65, 94, 99, 63, 58, 59, 43, 96] }
+    };
 
   Object.keys(sqlTagScores).forEach(tag => {
       createTagDetailChart(`sql${tag}Chart`, `SQL ${tag.replace('_', ' ')}`, sqlTagScores[tag].scores);
@@ -370,24 +371,37 @@ function createQuestionScoreCharts(tabId, testQuestionScores, allQuestionScores)
     const canvasId = `${tabId}Question${index + 1}Chart`;
     const canvas = document.getElementById(canvasId);
     canvas.style.display = 'none'; // 초기에 모든 차트를 숨김
-    createQuestionScoreChart(canvasId, `${tabId.toUpperCase()} 문제 ${index + 1}`, scores, allQuestionScores[index]);
+    createQuestionScoreChart(canvasId, `${tabId.toUpperCase()} Question ${index + 1}`, scores, allQuestionScores[index]);
   });
 }
 
 function createQuestionScoreChart(canvasId, label, testScores, allScores) {
+  const calculateFrequencyPercentage = (scores) => {
+    const frequency = new Array(5).fill(0);
+    scores.forEach(score => {
+      const index = Math.min(Math.floor(score / 20), 4);
+      frequency[index]++;
+    });
+    const total = scores.length;
+    return frequency.map(count => (count / total) * 100);
+  };
+
+  const testFrequencyPercentage = calculateFrequencyPercentage(testScores);
+  const allFrequencyPercentage = calculateFrequencyPercentage(allScores);
+
   const data = {
-    labels: testScores.map((_, index) => `${index * 20}-${(index + 1) * 20}`),
+    labels: ['0-20', '21-40', '41-60', '61-80', '81-100'],
     datasets: [
       {
         label: 'Test Candidates',
-        data: testScores,
+        data: testFrequencyPercentage,
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1
       },
       {
         label: 'All Candidates',
-        data: allScores,
+        data: allFrequencyPercentage,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1
@@ -400,9 +414,17 @@ function createQuestionScoreChart(canvasId, label, testScores, allScores) {
     scales: {
       y: {
         beginAtZero: true,
+        min: 0,
+        max: 100,
         title: {
           display: true,
-          text: 'Number of Candidates'
+          text: 'Percentage of Candidates'
+        },
+        ticks: {
+          callback: function(value) {
+            return value + '%';
+          },
+          stepSize: 20
         }
       },
       x: {
@@ -413,12 +435,26 @@ function createQuestionScoreChart(canvasId, label, testScores, allScores) {
       }
     },
     plugins: {
-      legend: { display: true }
+      legend: { display: true },
+      title: {
+        display: true,
+        text: label
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + '%';
+          }
+        }
+      }
     }
   };
+  
 
   createChart(canvasId, 'bar', data, options);
 }
+
+
 
 
 function showQuestionGraph(tabId, questionNumber) {
@@ -529,18 +565,30 @@ function showTagGraph(tabId, tagName) {
 }
 
 function createTagDetailChart(canvasId, label, scores) {
-
   const canvas = document.getElementById(canvasId);
   if (!canvas) {
     console.error(`Canvas with id ${canvasId} not found`);
-    return; // 캔버스가 없으면 함수 종료
+    return;
   }
 
+  // 빈도수 계산 및 퍼센트로 변환
+  const calculateFrequencyPercentage = (scores) => {
+    const frequency = new Array(5).fill(0);
+    scores.forEach(score => {
+      const index = Math.min(Math.floor(score / 20), 4);
+      frequency[index]++;
+    });
+    const total = scores.length;
+    return frequency.map(count => (count / total) * 100);
+  };
+
+  const frequencyPercentageData = calculateFrequencyPercentage(scores);
+
   const data = {
-    labels: scores.map((_, index) => `${index * 20}-${(index + 1) * 20}`),
+    labels: ['0-20', '21-40', '41-60', '61-80', '81-100'],
     datasets: [{
       label: 'Score Distribution',
-      data: scores,
+      data: frequencyPercentageData,
       backgroundColor: 'rgba(75, 192, 192, 0.2)',
       borderColor: 'rgba(75, 192, 192, 1)',
       borderWidth: 1
@@ -552,9 +600,16 @@ function createTagDetailChart(canvasId, label, scores) {
     scales: {
       y: {
         beginAtZero: true,
+        max: 100,
         title: {
           display: true,
-          text: 'Number of Candidates'
+          text: 'Percentage of Candidates'
+        },
+        ticks: {
+          callback: function(value) {
+            return value + '%';
+          },
+          stepSize: 20
         }
       },
       x: {
@@ -571,12 +626,21 @@ function createTagDetailChart(canvasId, label, scores) {
       title: {
         display: true,
         text: label + ' Score Distribution'
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + '%';
+          }
+        }
       }
     }
   };
 
   createChart(canvasId, 'bar', data, options);
 }
+
+
 
 function showFirstTag(tabId) {
   const firstTagButton = document.querySelector(`#${tabId} .tag-button`);
